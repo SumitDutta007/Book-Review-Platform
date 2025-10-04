@@ -61,7 +61,9 @@ const Book: React.FC = () => {
       tempBooks = tempBooks.filter(
         (book) =>
           typeof book.author !== "string" &&
-          book.author.username.toLowerCase().includes(authorSearch.toLowerCase())
+          book.author.username
+            .toLowerCase()
+            .includes(authorSearch.toLowerCase())
       );
     }
 

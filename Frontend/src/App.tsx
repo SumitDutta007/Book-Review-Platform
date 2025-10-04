@@ -6,6 +6,7 @@ import Auth from "./Pages/Auth";
 import Book from "./Pages/Book";
 import CreateBook from "./Pages/CreateBook";
 import Home from "./Pages/Home";
+import Profile from "./Pages/Profile";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/books" element={<Book />} />
           <Route path="/create-book" element={<CreateBook />} />
+          <Route path="/profile" element={<Profile />} />
         </Route>
       </Routes>
     </UserProvider>

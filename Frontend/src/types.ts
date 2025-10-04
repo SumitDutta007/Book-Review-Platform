@@ -1,6 +1,17 @@
 export interface User {
   _id: string;
   username: string;
+  email: string;
+  avatar?: string;
+}
+
+export interface Review {
+  _id: string;
+  user: User;
+  book: Book;
+  rating: number;
+  comment: string;
+  createdAt: string;
 }
 
 export interface Book {
@@ -11,5 +22,5 @@ export interface Book {
   rating: number;
   genre: string[];
   description: string;
-  reviews: any[]; // You can define a Review interface later
+  reviews: Review[];
 }

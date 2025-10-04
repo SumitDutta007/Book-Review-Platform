@@ -1,0 +1,22 @@
+.star-rating {
+  display: inline-flex;
+  color: #ffc107; /* Gold color for stars */
+  font-size: 1.2rem;
+}
+
+.star {
+  position: relative;
+  display: inline-block;
+}
+
+.half-star::before {
+  content: "★";
+  position: absolute;
+  left: 0;
+  width: 50%;
+  overflow: hidden;
+}
+
+.empty-star {
+  color: #e0e0e0; /* Light gray for empty stars */
+}

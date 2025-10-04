@@ -95,7 +95,7 @@ const Navbar = () => {
 
               {user ? (
                 <div className="nav-utilities">
-                    <div className="utility-icon">
+                    <div className="utility-icon" onClick={() => navigate("/profile")}>
                         <svg
                         width="20"
                         height="20"

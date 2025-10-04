@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import BookCarousel from "../Components/BookCarousel";
 import BookSummary from "../Components/BookSummary";
+import Footer from "../Components/Footer";
 import Hero from "../Components/Hero";
 import Navbar from "../Components/Navbar";
 import { UserContext } from "../Context/UserContext";
@@ -47,13 +48,14 @@ const Home = () => {
       <Navbar />
       <Hero />
       <BookSummary />
-      <BookCarousel title="Top Rated Books" books={topRatedBooks} />
-      <BookCarousel title="Fiction Picks" books={fictionBooks} />
-      <div className="browse-all-container">
+      <div className="browse-all-container text-lg">
         <Link to="/books" className="browse-all-link">
           Browse all categories &rarr;
         </Link>
       </div>
+      <BookCarousel title="Top Rated Books" books={topRatedBooks} />
+      <BookCarousel title="Fiction Picks" books={fictionBooks} />
+      <Footer />
     </>
   );
 };

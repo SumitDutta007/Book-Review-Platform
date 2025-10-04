@@ -46,7 +46,15 @@ export const createBook = async (req, res) => {
 export const getBookById = async (req, res) => {
   const { id } = req.params;
   try {
-    const book = await Book.findById(id);
+    const book = await Book.findById(id)
+      .populate("author", "username")
+      .populate({
+        path: "reviews",
+        populate: {
+          path: "user",
+          select: "username",
+        },
+      });
     if (!book) {
       return res.status(404).json({ message: "Book not found" });
     }
@@ -60,9 +68,20 @@ export const getBookById = async (req, res) => {
 // Controller function to update a book by ID
 export const updateBook = async (req, res) => {
   const { id } = req.params;
-  const { title, author, description } = req.body;
+  const { title, description, genre, image } = req.body;
+  const imagePath = req.file?.path;
+  let imageUrl;
 
   try {
+    if (imagePath) {
+      const uploadedImage = await uploadOnCloudinary(imagePath);
+      if (uploadedImage) {
+        imageUrl = uploadedImage.url;
+      }
+    } else {
+      imageUrl = image;
+    }
+
     const book = await Book.findById(id);
 
     if (!book) {
@@ -78,9 +97,13 @@ export const updateBook = async (req, res) => {
 
     const updatedBook = await Book.findByIdAndUpdate(
       id,
-      { title, author, description },
+      { title, description, genre, image: imageUrl },
       { new: true }
-    );
+    ).populate("author", "username");
+
+    if (!updatedBook) {
+      return res.status(404).json({ message: "Book not found" });
+    }
 
     res.json(updatedBook);
   } catch (error) {
@@ -131,6 +154,86 @@ export const getHighestRatedBookOfMonth = async (req, res) => {
     res.json(book);
   } catch (error) {
     console.error("Error fetching highest rated book:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+// Controller function to add a review to a book
+export const addReview = async (req, res) => {
+  const { id } = req.params;
+  const { rating, comment } = req.body;
+
+  try {
+    const book = await Book.findById(id);
+
+    if (!book) {
+      return res.status(404).json({ message: "Book not found" });
+    }
+
+    const newReview = {
+      user: req.user.id,
+      rating,
+      comment,
+    };
+
+    book.reviews.push(newReview);
+    await book.save();
+
+    await book.populate({
+      path: "reviews",
+      populate: {
+        path: "user",
+        select: "username",
+      },
+    });
+
+    res.status(201).json(book);
+  } catch (error) {
+    console.error("Error adding review:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+// Controller function to edit a review of a book
+export const editReview = async (req, res) => {
+  const { id, reviewId } = req.params;
+  const { rating, comment } = req.body;
+
+  try {
+    const book = await Book.findById(id);
+
+    if (!book) {
+      return res.status(404).json({ message: "Book not found" });
+    }
+
+    const review = book.reviews.id(reviewId);
+
+    if (!review) {
+      return res.status(404).json({ message: "Review not found" });
+    }
+
+    if (review.user.toString() !== req.user.id) {
+      return res
+        .status(403)
+        .json({ message: "User not authorized to edit this review" });
+    }
+
+    review.rating = rating;
+    review.comment = comment;
+
+    await book.save();
+
+    await book.populate({
+      path: "reviews",
+      populate: {
+        path: "user",
+        select: "username",
+      },
+    });
+
+    res.json(book);
+  } catch (error) {
+    console.error("Error editing review:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 };

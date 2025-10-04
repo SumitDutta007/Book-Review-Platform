@@ -9,6 +9,7 @@
   justify-content: center;
   height: 6rem; /* 96px */
   transition: transform 0.5s ease-in-out;
+  overflow: visible;
 }
 
 .navbar-hidden {
@@ -24,6 +25,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: visible;
 }
 
 /* Mobile Menu Toggle */
@@ -77,6 +79,7 @@
 .nav-left {
   justify-content: flex-start;
   margin-left: 1rem;
+  height: 100%;
 }
 
 .nav-right {
@@ -95,6 +98,7 @@
   letter-spacing: 0.5px;
   color: #374151; /* text-gray-800 */
   transition: color 0.3s ease;
+  height: 100%;
 }
 
 .nav-item:hover {
@@ -111,10 +115,61 @@
   transform: rotate(180deg);
 }
 
+.nav-item.dropdown {
+  position: static;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 80%;
+  left: 25%;
+  transform: translateX(-50%);
+  background-color: white;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  border-radius: 0;
+  padding: 2.5rem 3rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem 3rem;
+  width: auto;
+  max-width: none;
+  min-width: 650px;
+  z-index: 10000;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  overflow: visible;
+  margin-top: 0;
+}
+
+.nav-item.dropdown:hover .dropdown-menu,
+.dropdown-menu:hover {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+}
+
+.dropdown-item {
+  padding: 0.6rem 0;
+  color: #4b5563;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  text-align: left;
+  font-size: 0.875rem;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.dropdown-item:hover {
+  color: #c4a484;
+}
+
 /* Logo */
 .logo {
   text-align: center;
   color: #374151; /* text-gray-800 */
+  cursor: pointer;
 }
 
 .logo h1 {
@@ -202,6 +257,43 @@
 .mobile-menu-item {
   display: block;
   width: 100%;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: #374151;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.mobile-menu-item:hover {
+  background-color: #f3f4f6;
+}
+
+.mobile-submenu {
+  padding-left: 1rem;
+}
+
+.mobile-submenu-item {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  text-align: left;
+  background: none;
+  border: none;
+  font-size: 0.9rem;
+  color: #4b5563;
+  cursor: pointer;
+}
+
+.mobile-submenu-item:hover {
+  background-color: #f9fafb;
+}
+
+.mobile-menu-item {
+  display: block;
+  width: 100%;
   text-align: left;
   padding: 0.5rem 0.75rem; /* px-3 py-2 */
   color: #4b5563; /* text-gray-700 */
@@ -251,7 +343,7 @@
     display: block;
   }
 }
-.logout-btn{
+.logout-btn {
   background-color: #c9a97a;
   color: #fff;
   padding: 0.5rem 1rem;

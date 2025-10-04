@@ -113,7 +113,9 @@ const Profile: React.FC = () => {
                   <BookList books={[book]} />
                   <button
                     className="edit-icon-btn"
-                    onClick={() => navigate(`/edit-book/${book._id}`)}
+                    onClick={() =>
+                      navigate("/create-book", { state: { bookId: book._id } })
+                    }
                     aria-label={`Edit ${book.title}`}
                   >
                     <svg
@@ -153,7 +155,7 @@ const Profile: React.FC = () => {
                   <p className="review-card-comment">{review.comment}</p>
                   <button
                     className="edit-icon-btn"
-                    onClick={() => navigate(`/edit-review/${review._id}`)}
+                    onClick={() => navigate(`/book/${review.book._id}`)}
                     aria-label={`Edit your review for ${review.book.title}`}
                   >
                     <svg

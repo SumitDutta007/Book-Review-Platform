@@ -4,6 +4,7 @@ import ProtectedRoute from "./Components/ProtectedRoute";
 import { UserProvider } from "./Context/UserContext";
 import Auth from "./Pages/Auth";
 import Book from "./Pages/Book";
+import Books from "./Pages/Books";
 import CreateBook from "./Pages/CreateBook";
 import Home from "./Pages/Home";
 import Profile from "./Pages/Profile";
@@ -15,7 +16,8 @@ function App() {
         <Route path="/auth" element={<Auth />} />
         <Route element={<ProtectedRoute />}>
           <Route path="/" element={<Home />} />
-          <Route path="/books" element={<Book />} />
+          <Route path="/books" element={<Books />} />
+          <Route path="/book/:id" element={<Book />} />
           <Route path="/create-book" element={<CreateBook />} />
           <Route path="/profile" element={<Profile />} />
         </Route>

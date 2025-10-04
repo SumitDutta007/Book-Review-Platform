@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import type { Book } from "../types";
 import "./BookItem.css";
 
@@ -25,6 +26,12 @@ const StarRating = ({ rating }: { rating: number }) => {
 };
 
 const BookItem: React.FC<BookItemProps> = ({ book }) => {
+  const navigate = useNavigate();
+
+  const handleReviewClick = () => {
+    navigate(`/book/${book._id}`);
+  };
+
   return (
     <div className="book-item-card">
       <img src={book.image} alt={book.title} className="book-item-image" />
@@ -53,7 +60,9 @@ const BookItem: React.FC<BookItemProps> = ({ book }) => {
           </div>
         </div>
         <p className="book-item-desc">{book.description}</p>
-        <button className="book-item-review-btn">Review</button>
+        <button className="book-item-review-btn" onClick={handleReviewClick}>
+          Review
+        </button>
       </div>
     </div>
   );

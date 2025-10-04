@@ -71,7 +71,12 @@ const Hero = () => {
               >
                 Add Book
               </button>
-              <button className="hero-btn-primary">Review Book</button>
+              <button
+                className="hero-btn-primary"
+                onClick={() => navigate("/books")}
+              >
+                Review Book
+              </button>
             </div>
           </div>
 

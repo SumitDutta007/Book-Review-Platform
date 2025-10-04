@@ -11,6 +11,7 @@ interface SidebarProps {
   setAuthorSearch: (author: string) => void;
   rating: number;
   setRating: (rating: number) => void;
+  onClose?: () => void;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
@@ -22,11 +23,43 @@ const Sidebar: React.FC<SidebarProps> = ({
   setAuthorSearch,
   rating,
   setRating,
+  onClose,
 }) => {
-  const genres = ["Fiction", "Non-Fiction", "Science", "Fantasy", "History"];
+  const genres = [
+    "Fiction",
+    "Non-Fiction",
+    "Science",
+    "Fantasy",
+    "History",
+    "Romance",
+    "Mystery",
+  ];
 
   return (
     <aside className="sidebar">
+      {/* Close button for mobile */}
+      {onClose && (
+        <button
+          className="sidebar-close-btn"
+          onClick={onClose}
+          aria-label="Close filters"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+      )}
       <div className="sidebar-search">
         <input
           type="text"

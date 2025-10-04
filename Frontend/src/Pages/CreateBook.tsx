@@ -1,20 +1,60 @@
 import axios from "axios";
-import React, { useCallback, useContext, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../Components/Navbar";
 import { UserContext } from "../Context/UserContext";
 import "./CreateBook.css";
 
+const genresList = [
+  "Fiction",
+  "Non-Fiction",
+  "Science",
+  "Fantasy",
+  "History",
+  "Romance",
+  "Mystery",
+];
+
 const CreateBook: React.FC = () => {
+  const location = useLocation();
+  const bookId = location.state?.bookId;
+
   const [title, setTitle] = useState("");
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
   const [description, setDescription] = useState("");
   const [image, setImage] = useState<File | null>(null);
+  const [existingImageUrl, setExistingImageUrl] = useState<string | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const userContext = useContext(UserContext);
+
+  useEffect(() => {
+    if (bookId) {
+      const fetchBookData = async () => {
+        try {
+          const token = localStorage.getItem("token");
+          const response = await axios.get(
+            `http://localhost:5000/api/books/${bookId}`,
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          );
+          const book = response.data;
+          setTitle(book.title);
+          setSelectedGenres(book.genre);
+          setDescription(book.description);
+          setPreview(book.image);
+          setExistingImageUrl(book.image);
+        } catch (err) {
+          setError("Failed to fetch book data. Please try again.");
+          console.error(err);
+        }
+      };
+      fetchBookData();
+    }
+  }, [bookId]);
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     const file = acceptedFiles[0];
@@ -53,30 +93,43 @@ const CreateBook: React.FC = () => {
     formData.append("description", description);
     if (image) {
       formData.append("image", image);
+    } else if (existingImageUrl) {
+      formData.append("image", existingImageUrl);
     }
 
     try {
-      await axios.post("http://localhost:5000/api/books", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${userContext.user}`,
-        },
-      });
+      if (bookId) {
+        await axios.put(`http://localhost:5000/api/books/${bookId}`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${userContext.user}`,
+          },
+        });
+      } else {
+        await axios.post("http://localhost:5000/api/books", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${userContext.user}`,
+          },
+        });
+      }
       navigate("/books");
     } catch (err) {
-      setError("Failed to create book. Please try again.");
+      setError(
+        `Failed to ${bookId ? "update" : "create"} book. Please try again.`
+      );
       console.error(err);
     }
   };
-
-  const genres = ["Fiction", "Non-Fiction", "Science", "Fantasy", "History", "Romance", "Mystery"];
 
   return (
     <>
       <Navbar />
       <div className="create-book-container">
         <div className="create-book-form-wrapper">
-          <h1 className="create-book-title">Add a New Book</h1>
+          <h1 className="create-book-title">
+            {bookId ? "Edit Your Book" : "Add a New Book"}
+          </h1>
           <div className="create-book-layout">
             <div className="create-book-left">
               <div
@@ -89,7 +142,9 @@ const CreateBook: React.FC = () => {
                     <img
                       src={preview}
                       alt="Book preview"
-                      className="image-preview"
+                      className={`image-preview ${
+                        bookId && !image ? "existing-preview" : ""
+                      }`}
                     />
                   ) : (
                     <>
@@ -115,7 +170,7 @@ const CreateBook: React.FC = () => {
                 <div className="form-group">
                   <label>Genre</label>
                   <div className="genre-options-container">
-                    {genres.map((genre) => (
+                    {genresList.map((genre: string) => (
                       <button
                         type="button"
                         key={genre}
@@ -140,7 +195,7 @@ const CreateBook: React.FC = () => {
                 </div>
                 {error && <p className="error-message">{error}</p>}
                 <button type="submit" className="submit-btn">
-                  Create Book
+                  {bookId ? "Update Book" : "Create Book"}
                 </button>
               </form>
             </div>

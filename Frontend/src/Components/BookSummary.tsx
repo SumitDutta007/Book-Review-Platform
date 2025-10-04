@@ -56,7 +56,12 @@ const BookSummary: React.FC = () => {
             <p className="book-banner-desc">
               Rated {highestRatedBook.rating.toFixed(1)}/5
             </p>
-            <button className="book-banner-btn">Read Review</button>
+            <button
+              className="book-banner-btn"
+              onClick={() => navigate(`/book/${highestRatedBook._id}`)}
+            >
+              Read Review
+            </button>
           </div>
         </div>
       )}

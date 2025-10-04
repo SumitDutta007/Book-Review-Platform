@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import type { Book } from "../types";
 import "./BookCarousel.css";
 
@@ -8,6 +9,7 @@ interface BookCarouselProps {
 }
 
 const BookCarousel: React.FC<BookCarouselProps> = ({ title, books }) => {
+  const navigate = useNavigate();
   // A threshold to decide when to animate.
   // This can be adjusted based on the average screen size and book card width.
   const MIN_BOOKS_FOR_ANIMATION = 5;
@@ -17,6 +19,10 @@ const BookCarousel: React.FC<BookCarouselProps> = ({ title, books }) => {
 
   // Duplicate the books array for a seamless loop only if we are animating.
   const displayBooks = shouldAnimate ? [...books, ...books] : books;
+
+  const handleBookClick = (bookId: string) => {
+    navigate(`/book/${bookId}`);
+  };
 
   return (
     <div className="book-carousel-container">
@@ -30,7 +36,11 @@ const BookCarousel: React.FC<BookCarouselProps> = ({ title, books }) => {
           }`}
         >
           {displayBooks.map((book, index) => (
-            <div key={`${book._id}-${index}`} className="book-card">
+            <div
+              key={`${book._id}-${index}`}
+              className="book-card"
+              onClick={() => handleBookClick(book._id)}
+            >
               <img src={book.image} alt={book.title} className="book-image" />
               <div className="book-info">
                 <h3>{book.title}</h3>

@@ -2,8 +2,15 @@
 import jwt from "jsonwebtoken";
 
 export default function protectedRoute(req, res, next) {
-  // Get token from header or cookie
-  const token = req.header("auth-token") || req.cookies?.token;
+  // Get token from header
+  let token;
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith("Bearer")
+  ) {
+    token = req.headers.authorization.split(" ")[1];
+  }
+
   if (!token) {
     return res.status(401).json({ msg: "No token, authorization denied" });
   }

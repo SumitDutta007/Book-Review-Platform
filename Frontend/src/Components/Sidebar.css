@@ -1,0 +1,107 @@
+/* Sidebar.css */
+.sidebar {
+  width: 250px;
+  flex-shrink: 0;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  height: fit-content;
+}
+
+.sidebar-search input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+
+.sidebar-filters {
+  margin-top: 2rem;
+}
+
+.filters-main-title {
+  font-family: serif;
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
+.checkbox-item label {
+  margin-left: 0.5rem;
+  color: #555;
+  cursor: pointer;
+}
+
+.rating-filter {
+  padding: 1rem 0;
+}
+
+.rating-title {
+  font-family: serif;
+  font-size: 1.2rem;
+  margin: 0 0 1rem;
+  color: #444;
+}
+
+.rating-slider {
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 8px; /* Made the slider track thinner */
+  background: #ddd;
+  outline: none;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  border-radius: 5px;
+}
+
+.rating-slider:hover {
+  opacity: 1;
+}
+
+.rating-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: #007bff;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.rating-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: #007bff;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.rating-value {
+  text-align: center;
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.author-search-input {
+  margin-bottom: 15px;
+}
+
+.author-search-input input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}

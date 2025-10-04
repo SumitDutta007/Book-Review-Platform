@@ -1,0 +1,124 @@
+@keyframes scroll-right {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(
+      calc(-50% - 10px)
+    ); /* 50% for the half, 10px for gap */
+  }
+}
+
+.book-carousel-container {
+  margin: 2rem 0;
+  font-family: "Arial", sans-serif;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.book-carousel-container h2 {
+  font-size: 1.8rem;
+  font-family: serif;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.carousel-wrapper {
+  width: 100%;
+  overflow-x: auto; /* Enable horizontal scrolling */
+  cursor: grab;
+}
+
+.carousel-wrapper:active {
+  cursor: grabbing;
+}
+
+/* Hide scrollbar for a cleaner look */
+.carousel-wrapper::-webkit-scrollbar {
+  display: none;
+}
+.carousel-wrapper {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.carousel-track {
+  display: flex;
+  width: max-content;
+}
+
+.animated-track {
+  animation: scroll-right 30s linear infinite;
+}
+
+.static-wrapper {
+  justify-content: center;
+  display: flex;
+}
+
+.static-track {
+  justify-content: center;
+}
+
+.book-card {
+  width: 200px;
+  flex-shrink: 0;
+  padding: 0 10px;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+}
+
+.book-image {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.book-card:hover .book-image {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.book-info {
+  padding: 1rem 0.5rem;
+  text-align: center;
+}
+
+.book-info h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.book-info p {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0.2rem 0;
+}
+
+.browse-all-container {
+  text-align: right;
+  margin-top: 1.5rem;
+  padding-right: 10px;
+}
+
+.browse-all-link {
+  color: #c9a97a;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.browse-all-link:hover {
+  color: #b8996a;
+}

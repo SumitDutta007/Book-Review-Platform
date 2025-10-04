@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { UserContext } from "../Context/UserContext";
 import "./Auth.css";
 
 const Auth = () => {
   const navigate = useNavigate();
+  const userContext = useContext(UserContext);
   const [mode, setMode] = useState<"signup" | "signin">("signup");
   const [formData, setFormData] = useState({
     username: "",
@@ -60,8 +62,9 @@ const Auth = () => {
         toast.success(
           mode === "signup" ? "Registration successful!" : "Login successful!"
         );
-        // Save the token to localStorage
+        // Save the token to localStorage and update context
         localStorage.setItem("token", data.token);
+        userContext?.setUser(data.token);
         // Redirect to home page
         navigate("/");
       }

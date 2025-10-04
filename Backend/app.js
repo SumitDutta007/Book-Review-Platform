@@ -2,6 +2,7 @@ import cors from "cors";
 import express from "express";
 import { MongoConnect } from "./lib/MongoConnect.js";
 import auth from "./Routes/auth.js";
+import users from "./Routes/users.js";
 import books from "./Routes/books.js";
 import reviews from "./Routes/reviews.js";
 
@@ -15,6 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use("/api/auth", auth);
+app.use("/api/users", users);
 app.use("/api/books", books);
 app.use("/api/reviews", reviews);
 

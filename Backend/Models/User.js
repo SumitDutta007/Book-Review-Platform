@@ -14,11 +14,6 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  role: {
-    type: String,
-    enum: ["user", "author"],
-    default: "user",
-  },
   // You can add author-specific fields here
   // For example, a biography or a list of published books
   bio: {

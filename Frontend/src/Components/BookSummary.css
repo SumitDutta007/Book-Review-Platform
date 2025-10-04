@@ -1,0 +1,164 @@
+/* ...existing code... */
+
+.book-summary-section {
+  background-color: #f7f5ef;
+  padding: 4rem 2rem;
+  font-family: "Arial", sans-serif;
+}
+
+.book-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin-bottom: 3rem;
+  position: relative;
+}
+.book-banner::before {
+  content: "";
+  position: absolute;
+  background: url("/bestBook.jpg");
+  top: -13rem;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  opacity: 0.2;
+  z-index: 0;
+}
+@media (min-width: 768px) {
+  .book-banner {
+    flex-direction: row;
+  }
+}
+
+.book-banner-img-wrap {
+  flex-shrink: 0;
+    z-index: 1;
+}
+.book-banner-img {
+  width: 150px;
+  height: auto;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index:1;
+}
+
+.book-banner-content {
+  text-align: center;
+    z-index: 1;
+}
+@media (min-width: 768px) {
+  .book-banner-content {
+    text-align: left;
+  }
+}
+
+.book-banner-title {
+  font-size: 2rem;
+  font-family: serif;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 0.5rem;
+}
+
+.book-banner-desc {
+  font-size: 1.1rem;
+  color: #4a4a4a;
+  margin-bottom: 1.5rem;
+}
+
+.book-banner-btn {
+  background-color: #c9a97a;
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.book-banner-btn:hover {
+  background-color: #b8996a;
+}
+
+.book-summary-bottom {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+@media (min-width: 1024px) {
+  .book-summary-bottom {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.book-summary-promo {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.book-summary-promo::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.5;
+  z-index: 0;
+}
+
+.fiction-promo::before {
+  background: url("/fiction.jpg");
+}
+
+.nonfiction-promo::before {
+  background: url("/nonFiction.webp");
+}
+
+.book-summary-promo-content {
+  position: relative;
+  z-index: 1;
+}
+
+.book-summary-promo-title {
+  font-size: 1.5rem;
+  font-family: serif;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 0.5rem;
+}
+
+.book-summary-promo-desc {
+  font-size: 1rem;
+  color: #4a4a4a;
+  margin-bottom: 1.5rem;
+}
+
+.book-summary-promo-btn {
+  background-color: transparent;
+  color: black;
+  padding: 0.8rem 1.5rem;
+  border: 3px solid #767676;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.7s ease;
+}
+.book-summary-promo-btn:hover {
+  background-color: #c9a97a;
+  color: #fff;
+}

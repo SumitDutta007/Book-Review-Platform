@@ -1,0 +1,253 @@
+.navbar {
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 6rem; /* 96px */
+  transition: transform 0.5s ease-in-out;
+}
+
+.navbar-hidden {
+  transform: translateY(-100%);
+}
+
+.navbar-container {
+  max-width: 80rem; /* 1280px */
+  margin: 0 auto;
+  padding: 0.75rem 3rem; /* py-3 px-12 */
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Mobile Menu Toggle */
+.mobile-menu-toggle {
+  display: none;
+  cursor: pointer;
+  z-index: 1001;
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background-color: #374151; /* bg-gray-800 */
+  transition: all 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translateY(5px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translateY(-5px);
+}
+
+/* Desktop Navigation */
+.navbar-desktop {
+  display: none;
+}
+
+.nav-left,
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-left {
+  justify-content: flex-start;
+  margin-left: 1rem;
+}
+
+.nav-right {
+  justify-content: flex-end;
+  margin-right: 1rem;
+}
+
+.nav-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.875rem; /* text-sm */
+  letter-spacing: 0.5px;
+  color: #374151; /* text-gray-800 */
+  transition: color 0.3s ease;
+}
+
+.nav-item:hover {
+  color: #c4a484;
+}
+
+.dropdown-arrow {
+  font-size: 0.7rem;
+  color: #4b5563; /* text-gray-600 */
+  transition: transform 0.3s ease;
+}
+
+.nav-item:hover .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+/* Logo */
+.logo {
+  text-align: center;
+  color: #374151; /* text-gray-800 */
+}
+
+.logo h1 {
+  font-size: 2rem; /* text-2xl */
+  font-weight: 300; /* font-light */
+  letter-spacing: 3px;
+  margin: 0;
+  font-family: serif;
+}
+
+.logo p {
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  margin: 0;
+  color: #4b5563; /* text-gray-600 */
+  font-weight: 300; /* font-light */
+}
+
+/* Utility Icons */
+.nav-utilities {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* gap-4 */
+  margin-left: 1.5rem; /* ml-6 */
+}
+
+.utility-icon {
+  position: relative;
+  cursor: pointer;
+  color: #374151; /* text-gray-800 */
+  transition: color 0.3s ease;
+  padding: 0.5rem; /* p-2 */
+}
+
+.utility-icon:hover {
+  color: #c4a484;
+}
+
+.search-icon {
+  border: 1px solid #d1d5db; /* border-gray-300 */
+  border-radius: 0.25rem; /* rounded */
+}
+
+.search-icon:hover {
+  border-color: #c4a484;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #c4a484;
+  color: white;
+  border-radius: 9999px; /* rounded-full */
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: bold;
+}
+
+/* Mobile Specific Logo */
+.navbar-mobile-logo {
+  display: none;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+}
+
+.mobile-menu-items {
+  padding: 0.5rem 0.5rem 0.75rem; /* px-2 pt-2 pb-3 */
+}
+
+.mobile-menu-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.5rem 0.75rem; /* px-3 py-2 */
+  color: #4b5563; /* text-gray-700 */
+  font-weight: 500;
+  font-size: 0.875rem; /* text-sm */
+  letter-spacing: 0.025em; /* tracking-wide */
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.mobile-menu-item:hover {
+  color: #c4a484;
+}
+
+/* Tablet and Desktop Styles */
+@media (min-width: 1024px) {
+  .navbar-desktop {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    width: 100%;
+    gap: 2rem;
+  }
+}
+
+/* Mobile Styles */
+@media (max-width: 1023px) {
+  .mobile-menu-toggle {
+    display: block;
+  }
+  .navbar-mobile-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  .navbar-mobile-logo .logo h1 {
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+  }
+  .navbar-mobile-logo .logo p {
+    font-size: 0.6rem;
+    letter-spacing: 1px;
+  }
+  .mobile-menu {
+    display: block;
+  }
+}

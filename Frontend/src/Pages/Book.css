@@ -1,0 +1,19 @@
+/* Book.css */
+.book-page-container {
+  display: flex;
+  background-color: #f7f5ef;
+  padding: 2rem;
+  min-height: 100vh;
+  gap: 2rem;
+}
+
+.book-content {
+  flex-grow: 1;
+}
+
+.book-list-title {
+  font-family: serif;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #333;
+}

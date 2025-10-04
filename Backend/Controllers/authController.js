@@ -50,7 +50,7 @@ export const register = async (req, res) => {
   });
 
   // Return success response
-  res.status(201).json({ msg: "User registered successfully" });
+  res.status(201).json({ token, msg: "User registered successfully" });
 };
 
 // Implement login logic here
@@ -81,7 +81,7 @@ export const login = async (req, res) => {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
   });
-  res.status(200).json({ msg: "User logged in successfully" });
+  res.status(200).json({ token, msg: "User logged in successfully" });
 };
 
 // logout logic

@@ -1,0 +1,32 @@
+/* CollapsibleFilter.css */
+.collapsible-filter {
+  border-bottom: 1px solid #eee;
+  padding: 1rem 0;
+}
+
+.collapsible-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.collapsible-title {
+  font-family: serif;
+  font-size: 1.2rem;
+  margin: 0;
+  color: #444;
+}
+
+.collapsible-arrow {
+  font-size: 0.8rem;
+  transition: transform 0.3s ease;
+}
+
+.collapsible-arrow.open {
+  transform: rotate(180deg);
+}
+
+.collapsible-content {
+  padding-top: 1rem;
+}

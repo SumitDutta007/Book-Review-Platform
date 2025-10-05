@@ -1,4 +1,5 @@
 import cors from "cors";
+import dotenv from "dotenv";
 import express from "express";
 import { MongoConnect } from "./lib/MongoConnect.js";
 import auth from "./Routes/auth.js";
@@ -6,8 +7,10 @@ import books from "./Routes/books.js";
 import reviews from "./Routes/reviews.js";
 import users from "./Routes/users.js";
 
+dotenv.config();
+
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT;
 
 // Allowed origins for CORS
 const allowedOrigins = [

@@ -20,11 +20,14 @@ const Home = () => {
         return;
       }
       try {
-        const response = await axios.get("http://localhost:5000/api/books", {
-          headers: {
-            Authorization: `Bearer ${userContext.user}`,
-          },
-        });
+        const response = await axios.get(
+          "https://book-review-platform-pjx2.onrender.com/api/books",
+          {
+            headers: {
+              Authorization: `Bearer ${userContext.user}`,
+            },
+          }
+        );
         const books: Book[] = response.data;
 
         // Top Rated Books

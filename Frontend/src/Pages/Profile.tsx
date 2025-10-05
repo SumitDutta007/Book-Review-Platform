@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BookList from "../Components/BookList";
+import Footer from "../Components/Footer";
 import Navbar from "../Components/Navbar";
 import StarRating from "../Components/StarRating";
 import { UserContext } from "../Context/UserContext";
@@ -31,7 +32,7 @@ const Profile: React.FC = () => {
 
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/users/profile",
+          "https://book-review-platform-pjx2.onrender.com/api/users/profile",
           {
             headers: {
               Authorization: `Bearer ${userContext.user}`,
@@ -180,6 +181,7 @@ const Profile: React.FC = () => {
           )}
         </section>
       </div>
+      <Footer />
     </>
   );
 };

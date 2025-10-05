@@ -51,16 +51,16 @@ const Hero = () => {
 
             <div className="hero-achievements">
               <div className="hero-achievement">
-                <div className="hero-achievement-value">+4</div>
-                <div className="hero-achievement-label">Home layouts</div>
+                <div className="hero-achievement-value">+1000</div>
+                <div className="hero-achievement-label">Reviews</div>
               </div>
               <div className="hero-achievement">
-                <div className="hero-achievement-value">100%</div>
-                <div className="hero-achievement-label">Review widgets</div>
+                <div className="hero-achievement-value">+1000</div>
+                <div className="hero-achievement-label">Books</div>
               </div>
               <div className="hero-achievement">
-                <div className="hero-achievement-value">$130</div>
-                <div className="hero-achievement-label">Saved</div>
+                <div className="hero-achievement-value">Valid</div>
+                <div className="hero-achievement-label">Reviews</div>
               </div>
             </div>
 

@@ -10,6 +10,8 @@
 
 .book-content {
   flex-grow: 1;
+  min-width: 0; /* Allow flex item to shrink below content size */
+  flex-basis: 0; /* Equal distribution with flex-grow */
 }
 
 .book-list-title {
@@ -63,6 +65,16 @@
 
 .sidebar-overlay.active {
   display: block;
+}
+
+/* Desktop - Ensure sidebar is visible and positioned correctly */
+@media (min-width: 769px) {
+  .book-page-container > aside {
+    position: relative;
+    left: auto;
+    width: auto;
+    height: auto;
+  }
 }
 
 /* Responsive Design */

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useUser } from "../Context/UserContext";
 import "./Navbar.css";
 
@@ -31,6 +32,8 @@ const Navbar = () => {
 
   const handleLogout = () => {
     setUser(null);
+    localStorage.removeItem("token");
+    toast.success("Logged out successfully!");
     navigate("/auth");
   };
 
@@ -88,6 +91,9 @@ const Navbar = () => {
           <div className="nav-left">
             <Link to="/" className="nav-item">
               HOME
+            </Link>
+            <Link to="/books" className="nav-item">
+              ALL BOOKS
             </Link>
             <div className="nav-item dropdown">
               <span>GENRES</span>
@@ -153,6 +159,13 @@ const Navbar = () => {
             <div className="mobile-menu-items">
               <Link to="/" className="mobile-menu-item" onClick={toggleMenu}>
                 HOME
+              </Link>
+              <Link
+                to="/books"
+                className="mobile-menu-item"
+                onClick={toggleMenu}
+              >
+                ALL BOOKS
               </Link>
               <div
                 className="mobile-menu-item"

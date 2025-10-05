@@ -114,6 +114,21 @@
   color: #888;
 }
 
+.review-rating {
+  margin-bottom: 0.8rem;
+  display: flex;
+  gap: 0.2rem;
+}
+
+.review-rating .star {
+  font-size: 1.3rem;
+  color: #ddd;
+}
+
+.review-rating .star.filled {
+  color: #ffc107;
+}
+
 .review-text {
   font-size: 1rem;
   line-height: 1.6;

@@ -1,13 +1,14 @@
 /* Sidebar.css */
 .sidebar {
-  width: 250px;
+  width: 300px;
   flex-shrink: 0;
   background-color: #fff;
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   height: fit-content;
-  position: relative;
+  position: sticky;
+  top: 2rem;
 }
 
 /* Close button for mobile */

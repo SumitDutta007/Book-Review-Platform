@@ -17,7 +17,7 @@ const BookSummary: React.FC = () => {
       }
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/books/highest-rated",
+          "https://book-review-platform-pjx2.onrender.com/api/books/highest-rated",
           {
             headers: {
               Authorization: `Bearer ${userContext.user}`,

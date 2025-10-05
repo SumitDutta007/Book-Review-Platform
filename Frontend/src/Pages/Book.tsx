@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import Navbar from "../Components/Navbar";
 import { UserContext } from "../Context/UserContext";
 import "./Book.css";
@@ -47,7 +48,7 @@ const Book: React.FC = () => {
         setLoading(true);
         const token = localStorage.getItem("token");
         const response = await axios.get(
-          `http://localhost:5000/api/books/${id}`,
+          `https://book-review-platform-pjx2.onrender.com/api/books/${id}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -72,7 +73,7 @@ const Book: React.FC = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.put(
-        `http://localhost:5000/api/reviews/${reviewId}`,
+        `https://book-review-platform-pjx2.onrender.com/api/reviews/${reviewId}`,
         { comment: editedReviewText },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -84,21 +85,23 @@ const Book: React.FC = () => {
         return { ...prevBook, reviews: updatedReviews };
       });
       setEditingReviewId(null);
+      toast.success("Review updated successfully!");
     } catch (error) {
       console.error("Error updating review:", error);
+      toast.error("Failed to update review. Please try again.");
     }
   };
 
   const handleAddReview = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newReviewText || newReviewRating === 0) {
-      alert("Please provide a review and a rating.");
+      toast.warning("Please provide a review and a rating.");
       return;
     }
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        `http://localhost:5000/api/reviews`,
+        `https://book-review-platform-pjx2.onrender.com/api/reviews`,
         {
           bookId: id,
           comment: newReviewText,
@@ -112,8 +115,28 @@ const Book: React.FC = () => {
       });
       setNewReviewText("");
       setNewReviewRating(0);
+      toast.success("Review added successfully!");
     } catch (error) {
       console.error("Error adding review:", error);
+      let errorMessage = "Failed to add review. Please try again.";
+
+      if (axios.isAxiosError(error) && error.response?.data) {
+        // Try both 'message' and 'msg' properties
+        errorMessage =
+          error.response.data.message ||
+          error.response.data.msg ||
+          errorMessage;
+      }
+
+      // Check if it's a duplicate review error
+      if (
+        errorMessage.toLowerCase().includes("already reviewed") ||
+        errorMessage.toLowerCase().includes("duplicate")
+      ) {
+        toast.error("You have already reviewed this book!");
+      } else {
+        toast.error(errorMessage);
+      }
     }
   };
 
@@ -247,6 +270,18 @@ const Book: React.FC = () => {
                       <span className="review-date">
                         {new Date(review.createdAt).toLocaleDateString()}
                       </span>
+                    </div>
+                    <div className="review-rating">
+                      {[...Array(5)].map((_, index) => (
+                        <span
+                          key={index}
+                          className={
+                            index < review.rating ? "star filled" : "star"
+                          }
+                        >
+                          ★
+                        </span>
+                      ))}
                     </div>
                     <p className="review-text">{review.comment}</p>
                     {user && user._id === review.user._id && (

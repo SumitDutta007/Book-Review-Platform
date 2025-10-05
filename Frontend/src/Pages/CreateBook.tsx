@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import Navbar from "../Components/Navbar";
 import { UserContext } from "../Context/UserContext";
 import "./CreateBook.css";
@@ -36,7 +37,7 @@ const CreateBook: React.FC = () => {
         try {
           const token = localStorage.getItem("token");
           const response = await axios.get(
-            `http://localhost:5000/api/books/${bookId}`,
+            `https://book-review-platform-pjx2.onrender.com/api/books/${bookId}`,
             {
               headers: { Authorization: `Bearer ${token}` },
             }
@@ -99,25 +100,37 @@ const CreateBook: React.FC = () => {
 
     try {
       if (bookId) {
-        await axios.put(`http://localhost:5000/api/books/${bookId}`, formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${userContext.user}`,
-          },
-        });
+        await axios.put(
+          `https://book-review-platform-pjx2.onrender.com/api/books/${bookId}`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${userContext.user}`,
+            },
+          }
+        );
+        toast.success("Book updated successfully!");
       } else {
-        await axios.post("http://localhost:5000/api/books", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${userContext.user}`,
-          },
-        });
+        await axios.post(
+          "https://book-review-platform-pjx2.onrender.com/api/books",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${userContext.user}`,
+            },
+          }
+        );
+        toast.success("Book created successfully!");
       }
       navigate("/books");
     } catch (err) {
-      setError(
-        `Failed to ${bookId ? "update" : "create"} book. Please try again.`
-      );
+      const errorMessage = `Failed to ${
+        bookId ? "update" : "create"
+      } book. Please try again.`;
+      setError(errorMessage);
+      toast.error(errorMessage);
       console.error(err);
     }
   };

@@ -29,8 +29,8 @@ const Auth = () => {
     e.preventDefault();
     const url =
       mode === "signup"
-        ? "http://localhost:5000/api/auth/register"
-        : "http://localhost:5000/api/auth/login";
+        ? "https://book-review-platform-pjx2.onrender.com/api/auth/register"
+        : "https://book-review-platform-pjx2.onrender.com/api/auth/login";
 
     // For login, we only need email and password. For signup, we send more.
     const body =
@@ -39,7 +39,6 @@ const Auth = () => {
             username: formData.username,
             email: formData.email,
             password: formData.password,
-            role: formData.role,
           }
         : { email: formData.email, password: formData.password };
 
@@ -128,31 +127,6 @@ const Auth = () => {
             onChange={handleChange}
             required
           />
-          {/* Role Selection */}
-          {mode === "signup" && (
-            <div className="role-selection">
-              <label className="role-label">
-                <input
-                  type="radio"
-                  name="role"
-                  value="user"
-                  checked={formData.role === "user"}
-                  onChange={handleChange}
-                />
-                <span className="role-text">User</span>
-              </label>
-              <label className="role-label">
-                <input
-                  type="radio"
-                  name="role"
-                  value="author"
-                  checked={formData.role === "author"}
-                  onChange={handleChange}
-                />
-                <span className="role-text">Author</span>
-              </label>
-            </div>
-          )}
 
           <button className="auth-submit-btn" type="submit">
             {mode === "signup" ? "Sign up" : "Sign in"}

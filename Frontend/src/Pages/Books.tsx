@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import BookList from "../Components/BookList";
+import Footer from "../Components/Footer";
 import Navbar from "../Components/Navbar";
 import Sidebar from "../Components/Sidebar";
 import type { Book as BookType } from "../types";
@@ -27,7 +28,9 @@ const Books: React.FC = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/books");
+        const response = await axios.get(
+          "https://book-review-platform-pjx2.onrender.com/api/books"
+        );
         setBooks(response.data);
       } catch (err) {
         setError("Failed to fetch books. Please try again later.");
@@ -140,6 +143,7 @@ const Books: React.FC = () => {
           </svg>
         </button>
       </div>
+      <Footer />
     </>
   );
 };

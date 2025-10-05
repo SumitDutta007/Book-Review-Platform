@@ -130,7 +130,7 @@ Welcome to the **Book Review Platform** – a modern, feature-rich web applicati
 
 ## 🌐 Deployment
 
-- **Live Frontend:** [https://book-review-platform-git-main-sumitdutta007s-projects.vercel.app](https://book-review-platform-git-main-sumitdutta007s-projects.vercel.app)
+- **Live Frontend:** [https://book-review-platform-brown.vercel.app/](https://book-review-platform-brown.vercel.app/)
 - **Live Backend API:** [https://book-review-platform-pjx2.onrender.com](https://book-review-platform-pjx2.onrender.com)
 
 For detailed deployment instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md)

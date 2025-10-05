@@ -2,18 +2,27 @@ import cors from "cors";
 import express from "express";
 import { MongoConnect } from "./lib/MongoConnect.js";
 import auth from "./Routes/auth.js";
-import users from "./Routes/users.js";
 import books from "./Routes/books.js";
 import reviews from "./Routes/reviews.js";
+import users from "./Routes/users.js";
 
 const app = express();
 const port = process.env.PORT || 5000;
 
+// Allowed origins for CORS
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://book-review-platform-git-main-sumitdutta007s-projects.vercel.app",
+  process.env.FRONTEND_URL,
+].filter(Boolean);
+
 // Middleware
-app.use(cors({
-  origin: ["http://localhost:5173", "https://your-frontend.vercel.app"],
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

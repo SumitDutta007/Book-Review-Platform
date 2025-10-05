@@ -17,10 +17,21 @@ Welcome to the **Book Review Platform** – a modern, feature-rich web applicati
 
 ## 🛠️ Technologies & Frameworks Used
 
-- **TypeScript** (primary language)
-- Node.js/Express, React, MongoDB
-- TailwindCSS CSS
-- JWT, bcrypt, multer and other security modules
+### Backend
+- **Node.js** with **Express.js** - Server framework
+- **MongoDB** with **Mongoose** - Database
+- **JWT** - Authentication
+- **bcrypt** - Password hashing
+- **Multer** & **Cloudinary** - Image upload and storage
+- **CORS** - Cross-origin resource sharing
+
+### Frontend
+- **React** with **TypeScript** - UI framework
+- **Vite** - Build tool
+- **React Router** - Navigation
+- **Axios** - HTTP client
+- **React Toastify** - Toast notifications
+- **CSS** - Styling (no Tailwind)
 
 ---
 
@@ -40,17 +51,25 @@ Welcome to the **Book Review Platform** – a modern, feature-rich web applicati
 - `DELETE /api/books/{id}` – Remove a book
 
 ### **Reviews**
-- `GET /api/books/{id}/reviews` – List reviews for a book
-- `POST /api/books/{id}/reviews` – Add a review
+- `POST /api/reviews` – Add a review (requires bookId in body)
 - `PUT /api/reviews/{reviewId}` – Edit your review
 - `DELETE /api/reviews/{reviewId}` – Delete your review
 
 ### **Users**
-- `GET /api/users/{id}` – View user profile and reviews
+- `GET /api/users/profile` – Get logged-in user's profile data
+- `GET /api/users/{id}` – View user profile by ID
+- `PUT /api/users/{id}` – Update user profile
 
 ---
 
 ## 🏁 Getting Started
+
+### Prerequisites
+- Node.js (v14 or higher)
+- MongoDB (local or Atlas)
+- Cloudinary account (for image uploads)
+
+### Installation
 
 1. **Clone the repo**
    ```bash
@@ -58,35 +77,88 @@ Welcome to the **Book Review Platform** – a modern, feature-rich web applicati
    cd Book-Review-Platform
    ```
 
-2. **Install dependencies**
+2. **Backend Setup**
    ```bash
+   cd Backend
    npm install
-   # or
-   yarn install
+   ```
+   
+   Create a `.env` file in the `Backend` directory (see `.env.example` for template):
+   ```env
+   PORT=5000
+   URI=your_mongodb_connection_string
+   JWT_SECRET=your_jwt_secret
+   CLOUDINARY_CLOUD_NAME=your_cloudinary_name
+   CLOUDINARY_API_KEY=your_cloudinary_key
+   CLOUDINARY_API_SECRET=your_cloudinary_secret
+   FRONTEND_URL=http://localhost:5173
+   NODE_ENV=development
    ```
 
-3. **Configure environment variables**
-   - Copy `.env.example` to `.env` and fill out required values (DB, JWT secret, etc.)
-
-4. **Run the app**
+3. **Frontend Setup**
    ```bash
-   npm run dev
-   # or
-   yarn dev
+   cd ../Frontend
+   npm install
+   ```
+   
+   Create a `.env` file in the `Frontend` directory (see `.env.example` for template):
+   ```env
+   VITE_API_URL=http://localhost:5000
    ```
 
-5. **Access**
-   - API: `http://localhost:3000/api`
-   - Frontend: `http://localhost:3000/`
+4. **Run the application**
+   
+   **Backend:**
+   ```bash
+   cd Backend
+   npm start
+   # or for development
+   node app.js
+   ```
+   
+   **Frontend** (in a new terminal):
+   ```bash
+   cd Frontend
+   npm run dev
+   ```
+
+5. **Access the application**
+   - Frontend: `http://localhost:5173`
+   - Backend API: `http://localhost:5000/api`
 
 ---
 
-## 🌟 Extra Goodies
+## 🌐 Deployment
 
-- **Well-documented codebase** with clear comments
-- **Extensible architecture** for easy feature addition
-- **Unit and integration tests** (if present, mention coverage)
-- **Open to contributions!** Check issues or create a pull request
+- **Live Frontend:** [https://book-review-platform-git-main-sumitdutta007s-projects.vercel.app](https://book-review-platform-git-main-sumitdutta007s-projects.vercel.app)
+- **Live Backend API:** [https://book-review-platform-pjx2.onrender.com](https://book-review-platform-pjx2.onrender.com)
+
+For detailed deployment instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md)
+
+---
+
+## 🌟 Features in Detail
+
+- ✅ **User Authentication:** Secure JWT-based authentication
+- ✅ **Book Management:** Create, read, update, and delete books
+- ✅ **Review System:** One review per user per book with star ratings
+- ✅ **Automatic Rating Calculation:** Book ratings update automatically
+- ✅ **Image Upload:** Cloudinary integration for book cover images
+- ✅ **Responsive Design:** Mobile-friendly UI with hamburger menus
+- ✅ **Genre Filtering:** Browse books by multiple genres
+- ✅ **Search Functionality:** Find books by title, author, or rating
+- ✅ **Toast Notifications:** User-friendly feedback for all actions
+- ✅ **Protected Routes:** Secure pages requiring authentication
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ---
 
